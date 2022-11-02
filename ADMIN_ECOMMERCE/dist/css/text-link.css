@@ -1,0 +1,11 @@
+.ratafont {
+    padding-top: 10px; text-align: left !important;
+}
+
+.linkfont {
+    color: white;
+}
+
+.linkfont:hover {
+    color: #a4a8b1;
+}
