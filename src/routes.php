@@ -78,6 +78,24 @@ $app->get("/Keranjang/{nomor}", function (Request $request, Response $response, 
     }
 });
 
+$app->post("/SearchProduk/{cari}", function (Request $request, Response $response, $arg) {
+    $getRecord = $request->getParams();
+    $params = [
+        ":cari" => $arg["cari"]
+    ];
+    $cari = $params;
+    $sql = "SELECT * FROM PRODUK WHERE MEREK LIKE '%" . $arg["cari"] . "%'";
+    // $sql = "SELECT * FROM PRODUK WHERE MEREK =:cari";
+    $stmt = $this->db->prepare($sql);
+    $stmt->execute($params);
+    if ($stmt->rowCount() > 0) {
+        $result = $stmt->fetchAll();
+        return $response->withJson(["success" => "true", "message" => 'Login Sukses', "data" => $result], 200);
+    } else {
+        return $response->withJson(["success" => "false", "message" => 'Data Tidak Di Temukan', "data" => ""], 201);
+    }
+});
+
 $app->get("/CartList/{nomor}", function (Request $request, Response $response, $arg) {
     $getRecord = $request->getParams();
     $params = [
@@ -96,14 +114,19 @@ $app->get("/CartList/{nomor}", function (Request $request, Response $response, $
 
 $app->post("/SignIn", function (Request $request, Response $response) {
     $record = $request->getParsedBody();
-    $sql = "SELECT * FROM USERS WHERE EMAIL =:EMAIL AND PASS =:PASS";
+    $sql = "SELECT * FROM USERS WHERE EMAIL =:EMAIL OR PASS =:PASS";
+    $getsql = "SELECT * FROM USERS WHERE EMAIL = ?";
+    $result = $this->db->prepare($getsql);
+    $result->bindParam(1, $record["EMAIL"]);
+    $result->execute();
+    $user = $result->fetch();
     $stmt = $this->db->prepare($sql);
     $data = [
         ":EMAIL" => $record["EMAIL"],
         ":PASS" => $record["PASS"]
     ];
     $stmt->execute($data);
-    if ($stmt->rowCount() > 0) {
+    if ($stmt->rowCount() > 0 && password_verify($record["PASS"], $user["PASS"])) {
         $result = $stmt->fetch();
         return $response->withJson(["success" => "true", "message" => 'Login Sukses', "data" => $result], 200);
     } else {
@@ -132,11 +155,15 @@ $app->post("/Register", function (Request $request, Response $response) {
     $sql = "INSERT INTO USERS (NAMA_DEPAN, NAMA_BELAKANG, EMAIL, PASS, PROVINSI, KOTA, TAG_KOTA, ALAMAT_LENGKAP, KODE_POS, NOMOR_TELEPON, LEVEL) 
 			VALUE (:NAMA_DEPAN, :NAMA_BELAKANG, :EMAIL, :PASS, :PROVINSI, :KOTA, :TAG_KOTA, :ALAMAT_LENGKAP, :KODE_POS, :NOMOR_TELEPON, :LEVEL)";
     $stmt = $this->db->prepare($sql);
+    $hash = password_hash(
+        $record["PASS"],
+        PASSWORD_DEFAULT
+    );
     $data = [
         ":NAMA_DEPAN" => isset($record["NAMA_DEPAN"]) ? $record["NAMA_DEPAN"] : "",
         ":NAMA_BELAKANG" => isset($record["NAMA_BELAKANG"]) ? $record["NAMA_BELAKANG"] : "",
         ":EMAIL" => isset($record["EMAIL"]) ? $record["EMAIL"] : "",
-        ":PASS" => isset($record["PASS"]) ? $record["PASS"] : "",
+        ":PASS" => isset($record["PASS"]) ? $hash : "",
         ":PROVINSI" => isset($record["PROVINSI"]) ? $record["PROVINSI"] : "",
         ":KOTA" => isset($record["KOTA"]) ? $record["KOTA"] : "",
         ":TAG_KOTA" => isset($record["TAG_KOTA"]) ? $record["TAG_KOTA"] : 0,

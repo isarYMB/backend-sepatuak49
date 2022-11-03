@@ -221,7 +221,7 @@ if (isset($_POST['logout'])) {
     <div class="float-right d-none d-sm-block">
       <b>Version</b> 1.1.0-pre
     </div>
-    <strong>Copyright &copy; AK49 2021<a href="index.php">AK49</a>.</strong> All rights reserved.
+    <strong>Copyright &copy; AK49 2023 <a href="index.php">AK49</a>.</strong> All rights reserved.
   </footer>
 
   <!-- Control Sidebar -->

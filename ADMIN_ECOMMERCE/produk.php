@@ -336,7 +336,7 @@ if (isset($_POST['logout'])) {
     <div class="float-right d-none d-sm-block">
       <b>Version</b> 1.1.0-pre
     </div>
-    <strong>Copyright &copy; AK49 2021<a href="index.php">AK49</a>.</strong> All rights reserved.
+    <strong>Copyright &copy; AK49 2023 <a href="index.php">AK49</a>.</strong> All rights reserved.
   </footer>
 
   <!-- Control Sidebar -->
@@ -430,7 +430,7 @@ if (isset($_POST["tambah"])) {
           $prosesUpload = move_uploaded_file($lokasiTmp, $lokasiBaru);
         }
 
-        $url = 'http://192.168.1.5/ECOMMERSE/' . 'image' . '/' . $merek . '/' . $filename;
+        $url = 'http://192.168.1.8/ECOMMERSE/' . 'image' . '/' . $merek . '/' . $filename;
         move_uploaded_file($_FILES['gambarutama']['tmp_name'], $temp . '/' . $filename);
         mysqli_query($conn, "INSERT INTO produk (ID, MEREK, BRAND, DESKRIPSI, HARGA, DISKON, GAMBAR, lensUUID)
         VALUES (NULL,'$merek','$brand','$deskripsi','$harga','$diskon','$url','$lensUUID')");

@@ -180,6 +180,7 @@ if (isset($_POST['logout'])) {
                 <table class="table table-head-fixed text-nowrap">
                   <thead>
                     <tr>
+                      <th>Edit</th>
                       <th>ID</th>
                       <th>User</th>
                       <th>Produk</th>
@@ -188,7 +189,6 @@ if (isset($_POST['logout'])) {
                       <th>Total</th>
                       <th>Status</th>
                       <th>Verifikasi</th>
-                      <th>Edit</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -214,32 +214,6 @@ if (isset($_POST['logout'])) {
                       <?php $idS = $d['ID_USER']; ?>
                       <?php $idP = $d['ID_PRODUK']; ?>
                       <tr>
-                        <td><?php echo $d['ID']; ?></td>
-                        <td><?php $data2 = mysqli_query($conn, "select * from USERS where id=$idS");
-                            $c = mysqli_fetch_array($data2);
-                            echo $c["NAMA_DEPAN"]; ?></td>
-                        <td><?php $data3 = mysqli_query($conn, "select * from PRODUK where id=$idP");
-                            $b = mysqli_fetch_array($data3);
-                            echo $b["MEREK"]; ?></td>
-                        <td><?php echo $d['UKURAN_SEPATU']; ?></td>
-                        <td><?php echo $d['JUMLAH_PESANAN']; ?></td>
-                        <td><?php echo $d['TOTAL_PESANAN']; ?></td>
-                        <td><?php $status = $d['STATUS'];
-                            if ($status == 1) {
-                              echo "Pendataan";
-                            } elseif ($status == 2) {
-                              echo "Packaging";
-                            } elseif ($status == 3) {
-                              echo "Pengiriman";
-                            } else {
-                              echo "Selesai";
-                            } ?></td>
-                        <td><?php $verifikasi = $d['VERIFIKASI'];
-                            if ($verifikasi == 1) {
-                              echo "Belum di verifikasi";
-                            } else {
-                              echo "Telah di verifikasi";
-                            } ?></td>
                         <td>
                           <!-- membuat tombol dengan ukuran small berwarna biru  -->
                           <!-- data-target setiap modal harus berbeda, karena akan menampilkan data yang berbeda pula
@@ -315,8 +289,33 @@ if (isset($_POST['logout'])) {
                               </div>
                             </div>
                           </div>
-
                         </td>
+                        <td><?php echo $d['ID']; ?></td>
+                        <td><?php $data2 = mysqli_query($conn, "select * from USERS where id=$idS");
+                            $c = mysqli_fetch_array($data2);
+                            echo $c["NAMA_DEPAN"]; ?></td>
+                        <td><?php $data3 = mysqli_query($conn, "select * from PRODUK where id=$idP");
+                            $b = mysqli_fetch_array($data3);
+                            echo $b["MEREK"]; ?></td>
+                        <td><?php echo $d['UKURAN_SEPATU']; ?></td>
+                        <td><?php echo $d['JUMLAH_PESANAN']; ?></td>
+                        <td><?php echo $d['TOTAL_PESANAN']; ?></td>
+                        <td><?php $status = $d['STATUS'];
+                            if ($status == 1) {
+                              echo "Pendataan";
+                            } elseif ($status == 2) {
+                              echo "Packaging";
+                            } elseif ($status == 3) {
+                              echo "Pengiriman";
+                            } else {
+                              echo "Selesai";
+                            } ?></td>
+                        <td><?php $verifikasi = $d['VERIFIKASI'];
+                            if ($verifikasi == 1) {
+                              echo "Belum di verifikasi";
+                            } else {
+                              echo "Telah di verifikasi";
+                            } ?></td>
                         <!-- <td><button><i class="nav-icon fas fa-edit"></i></button></td> -->
                       </tr>
                     <?php
@@ -342,7 +341,7 @@ if (isset($_POST['logout'])) {
     <div class="float-right d-none d-sm-block">
       <b>Version</b> 1.1.0-pre
     </div>
-    <strong>Copyright &copy; AK49 2021<a href="index.php">AK49</a>.</strong> All rights reserved.
+    <strong>Copyright &copy; AK49 2023 <a href="index.php">AK49</a>.</strong> All rights reserved.
   </footer>
 
   <!-- Control Sidebar -->
