@@ -2,8 +2,10 @@ runtime: php74
 service: admin
 
 handlers:
-- url: /(.+\.php)$
-  script: \1
+- url: /([^/]+\.php)
+  script: auto
 
 - url: /.*
-  script: index.php
+  script: auto
+  login: required
+  secure: always
