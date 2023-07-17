@@ -430,7 +430,7 @@ if (isset($_POST["tambah"])) {
           $prosesUpload = move_uploaded_file($lokasiTmp, $lokasiBaru);
         }
 
-        $url = 'http://192.168.1.8/ECOMMERSE/' . 'image' . '/' . $merek . '/' . $filename;
+        $url = 'https://voltaic-nebula-393108.et.r.appspot.com/' . 'image' . '/' . $merek . '/' . $filename;
         move_uploaded_file($_FILES['gambarutama']['tmp_name'], $temp . '/' . $filename);
         mysqli_query($conn, "INSERT INTO produk (ID, MEREK, BRAND, DESKRIPSI, HARGA, DISKON, GAMBAR, lensUUID)
         VALUES (NULL,'$merek','$brand','$deskripsi','$harga','$diskon','$url','$lensUUID')");

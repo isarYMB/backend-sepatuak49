@@ -1,0 +1,9 @@
+runtime: php74
+service: default
+
+handlers:
+- url: /(.+\.php)$
+  script: \1
+
+- url: /public
+  script: index.php

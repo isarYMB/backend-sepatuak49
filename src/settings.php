@@ -18,9 +18,9 @@ return [
 
         // Database Setting
         'db' => [
-            'host' => '127.0.0.1',
+            'host' => '34.128.121.200',
             'user' => 'root',
-            'pass' => '',
+            'pass' => 'skripsi-db2023',
             'dbname' => 'sepatuak49',
             'driver' => 'mysql'
         ]

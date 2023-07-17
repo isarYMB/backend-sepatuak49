@@ -1,6 +1,6 @@
 <?php
 
-$conn = mysqli_connect("127.0.0.1", "root", "", "sepatuak49");
+$conn = mysqli_connect("34.128.121.200", "root", "skripsi-db2023", "sepatuak49");
 
 function query($query)
 {
