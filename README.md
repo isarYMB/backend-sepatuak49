@@ -8,4 +8,4 @@
 
     Ubah IP di web pada produk.php line 433 "http://{IP ADDRESS}/ECOMMERSE/"
 
-    Route API "http://{IP Address}/ECOMMERSE/public/{Route}}"
+    Route API "http://{IP Address}/ECOMMERSE/public/{Route}"
